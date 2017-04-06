@@ -1,3 +1,5 @@
+import java.sql.SQLException;
+
 /**---------------------------------------------------**
  *
  *              Created by Lenny Ramos
@@ -24,5 +26,22 @@
  */
 
 
-public class Main {
+public class Main
+{
+
+    public static void main(String [] args)
+    {
+
+    ConnectDatabase connection = new ConnectDatabase();
+
+    try
+    {
+        connection.connect();
+    }
+    catch(ClassNotFoundException e)
+    {
+        System.err.println(e.getMessage());
+    }
+
+    }
 }

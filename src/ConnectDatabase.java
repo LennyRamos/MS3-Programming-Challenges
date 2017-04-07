@@ -9,8 +9,30 @@ public class ConnectDatabase
 
     public static void connect() throws ClassNotFoundException
     {
+        //This is for the SQLite driver
+        final String sqlite_Driver= "org.sqlite.JDBC";
+
+        //Creating a database connection, to MS3.db
+        final String database = "jdbc:sqlite:MS3.db";
+
+        //This is to drop the table that we created previously with each new run
+        final String dropMS3Table = "Drop Table if exists Users";
+
+        //This is the DDL for the CREATE TABLE of my SQLite database
+        final String MS3Table = "Create Table Users " +
+                              "(FirstName   VARCHAR(20), " +
+                              " LastName    VARCHAR(20), " +
+                              " Email       VARCHAR(35), " +
+                              " Gender      CHAR(6), " +
+                              " Image       TEXT, " +
+                              " PaymentType VARCHAR(35), " +
+                              " AmountPaid  CHAR(7), " +
+                              " Validator1  BOOLEAN, " +
+                              " Validator2  BOOLEAN, " +
+                              " City        VARCHAR)";
+
         //load the sqlite-JDBC driver using the current class loader
-        Class.forName("org.sqlite.JDBC");
+        Class.forName(sqlite_Driver);
 
         Connection connection = null;
 
@@ -20,20 +42,23 @@ public class ConnectDatabase
             // connection = DriverManager.getConnection("jdbc:sqlite::memory:);"
 
             //Creates a database connection, creates the users.db if does not exist
-            connection = DriverManager.getConnection("jdbc:sqlite:users.db");
+            connection = DriverManager.getConnection(database);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);  //set timeout to 30 seconds
 
-            statement.executeUpdate("drop table if exists person");
-            statement.executeUpdate("create table person(id integer, name string)");
-            statement.executeUpdate("insert into person values(1, 'leo')");
-            statement.executeUpdate("insert into person values(2, 'yui')");
-            ResultSet resultSet = statement.executeQuery("select * from person");
+            statement.executeUpdate(dropMS3Table);
+            statement.executeUpdate(MS3Table);
+
+            statement.executeUpdate("insert into Users (FirstName,LastName,Email) values('Lenny', 'Ramos', 'tuf18062@temple.edu')");
+            statement.executeUpdate("insert into Users (FirstName, LastName, Email) values('George', 'Keenan', 'bitch@aol.com')");
+            ResultSet resultSet = statement.executeQuery("select * from Users");
 
             while(resultSet.next())
             {
-                System.out.println("name = " + resultSet.getString("name"));
-                System.out.println("id = " + resultSet.getInt("id"));
+                //Print out test example from database
+                System.out.println("FirstName = " + resultSet.getString("FirstName"));
+                System.out.println("LastName = " + resultSet.getString("LastName"));
+                System.out.println("Email = " + resultSet.getString("Email"));
             }
         }
         catch(SQLException e)

@@ -10,16 +10,16 @@ public class ConnectDatabase
     public static void connect() throws ClassNotFoundException
     {
         //This is for the SQLite driver
-        final String sqlite_Driver= "org.sqlite.JDBC";
+        final String SQLITE_DRIVER= "org.sqlite.JDBC";
 
         //Creating a database connection, to MS3.db
-        final String database = "jdbc:sqlite:MS3.db";
+        final String DATABASE = "jdbc:sqlite:MS3.db";
 
         //This is to drop the table that we created previously with each new run
-        final String dropMS3Table = "Drop Table if exists Users";
+        final String DROP_MS3_TABLE = "Drop Table if exists Users";
 
         //This is the DDL for the CREATE TABLE of my SQLite database
-        final String MS3Table = "Create Table Users " +
+        final String MS3_TABLE = "Create Table Users " +
                               "(FirstName   VARCHAR(20), " +
                               " LastName    VARCHAR(20), " +
                               " Email       VARCHAR(35), " +
@@ -32,7 +32,7 @@ public class ConnectDatabase
                               " City        VARCHAR)";
 
         //load the sqlite-JDBC driver using the current class loader
-        Class.forName(sqlite_Driver);
+        Class.forName(SQLITE_DRIVER);
 
         Connection connection = null;
 
@@ -42,12 +42,12 @@ public class ConnectDatabase
             // connection = DriverManager.getConnection("jdbc:sqlite::memory:);"
 
             //Creates a database connection, creates the users.db if does not exist
-            connection = DriverManager.getConnection(database);
+            connection = DriverManager.getConnection(DATABASE);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);  //set timeout to 30 seconds
 
-            statement.executeUpdate(dropMS3Table);
-            statement.executeUpdate(MS3Table);
+            statement.executeUpdate(DROP_MS3_TABLE);
+            statement.executeUpdate(MS3_TABLE);
 
             statement.executeUpdate("insert into Users (FirstName,LastName,Email) values('Lenny', 'Ramos', 'tuf18062@temple.edu')");
             statement.executeUpdate("insert into Users (FirstName, LastName, Email) values('George', 'Keenan', 'bitch@aol.com')");

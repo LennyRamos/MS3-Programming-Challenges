@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
 /**---------------------------------------------------**
@@ -33,12 +34,22 @@ public class Main
     {
 
     ConnectDatabase connection = new ConnectDatabase();
+    CSVParser parser = new CSVParser();
 
     try
     {
         connection.connect();
     }
     catch(ClassNotFoundException e)
+    {
+        System.err.println(e.getMessage());
+    }
+
+    try
+    {
+        parser.doParse();
+    }
+    catch(FileNotFoundException e)
     {
         System.err.println(e.getMessage());
     }

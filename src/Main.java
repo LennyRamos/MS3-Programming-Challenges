@@ -30,29 +30,22 @@ import java.sql.SQLException;
 public class Main
 {
 
-    public static void main(String [] args)
-    {
+    public static void main(String [] args) {
 
-    ConnectDatabase connection = new ConnectDatabase();
-    CSVParser parser = new CSVParser();
+        ConnectDatabase connection = new ConnectDatabase();
+        CSVParser parser = new CSVParser();
 
-    try
-    {
-        connection.connect();
-    }
-    catch(ClassNotFoundException e)
-    {
-        System.err.println(e.getMessage());
-    }
+        try {
+            connection.connect();
+        } catch (ClassNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
 
-    try
-    {
-        parser.doParse();
-    }
-    catch(FileNotFoundException e)
-    {
-        System.err.println(e.getMessage());
-    }
+        try {
+            parser.doParse();
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
 
     }
 }

@@ -12,6 +12,7 @@ import java.util.Scanner;
  */
 public class CSVParser
 {
+    //ConnectDatabase connection;
 
     private static final char DEFAULT_SEPARATOR = ',';
     private static final char DEFAULT_QUOTE = '"';
@@ -23,8 +24,14 @@ public class CSVParser
     static public int number_passed = 0;
     static public int number_failed = 0;
 
+    //this constructor allows me to take the connection and call the method inside class to write entries
+    public CSVParser()
+    {
 
-    public static void doParse() throws FileNotFoundException
+    }
+
+
+    public void doParse() throws FileNotFoundException
     {
         //this is the CSV file where ill be writing all the failed rows
         CSVBuilder failedFile = new CSVBuilder();
@@ -42,13 +49,12 @@ public class CSVParser
         {
             number_received++;
             List<String> line = parseLine(scanner.nextLine());
+            //connection.addEntry(line);
 
             if(pass_column_count)
             {
                 number_passed++;
-                /*System.out.println("The size of the line is: " + line.size() + " Value of the name " + line.get(0)
-                        + line.get(1) + line.get(2) + line.get(3) + line.get(4) + line.get(5) +
-                        line.get(6) + line.get(7) + line.get(8) + line.get(9));*/
+
             }
             else
             {
@@ -62,15 +68,10 @@ public class CSVParser
         //closes the failed .csv file
         closeFile(failedFile);
 
-        //This creates a basic .txt file with the statistics of the .csv file that was passed in 
+        //This creates a basic .txt file with the statistics of the .csv file that was passed in
         logStatistics = new LogFile(number_received, number_passed, number_failed);
         logStatistics.CreateLog();
 
-        /* Primitive test, numbers seemed correct
-        System.out.println("\nNumber received: " + number_received +
-                            "\nNumber passed: " + number_passed +
-                            "\nNumber failed: " + number_failed);
-                            */
     }
 
     public static List<String> parseLine(String csvLine)

@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +20,10 @@ public class LogFile {
 
     static PrintWriter pw;
 
+    //Can implement this to create a .log file if that is what is wanted
+    //Logger logger = Logger.getLogger("Statistics");
+    //FileHandler fh;
+
     public LogFile(int number_received, int number_passed, int number_failed )
     {
         this.number_received = number_received;
@@ -26,7 +33,7 @@ public class LogFile {
 
     public static void CreateLog()throws FileNotFoundException
     {
-        pw = new PrintWriter(new File("StatisticsLog.txt"));
+        pw = new PrintWriter(new File("StatisticsLog.log"));
 
         pw.write("These are statistics of the .csv file you have passed in" +
                 "\nThe row entries failed in any of the columns where NULL/Empty");
@@ -36,5 +43,7 @@ public class LogFile {
         pw.write("\nThese are all the files the failed: " + number_failed);
 
         pw.close();
+
     }
+
 }

@@ -49,8 +49,8 @@ public class ConnectDatabase
             statement.executeUpdate(DROP_MS3_TABLE);
             statement.executeUpdate(MS3_TABLE);
 
-            statement.executeUpdate("insert into Users (FirstName,LastName,Email) values('Lenny', 'Ramos', 'tuf18062@temple.edu')");
-            statement.executeUpdate("insert into Users (FirstName, LastName, Email) values('George', 'Keenan', 'bitch@aol.com')");
+            //statement.executeUpdate("insert into Users (FirstName,LastName,Email) values('Lenny', 'Ramos', 'tuf18062@temple.edu')");
+            //statement.executeUpdate("insert into Users (FirstName, LastName, Email) values('George', 'Keenan', 'bitch@aol.com')");
             ResultSet resultSet = statement.executeQuery("select * from Users");
 
             while(resultSet.next())

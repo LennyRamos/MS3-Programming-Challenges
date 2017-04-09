@@ -30,6 +30,8 @@ public class CSVParser
         CSVBuilder failedFile = new CSVBuilder();
         createFile(failedFile);
 
+        LogFile logStatistics;
+
         //Need to figure out how to import csv file, need to specify pathname depending what machine you're using
         String csvFile = "/Users/Lenny Ramos/IdeaProjects/MS3-Programming-Challenge/ms3Interview.csv";
 
@@ -60,10 +62,15 @@ public class CSVParser
         //closes the failed .csv file
         closeFile(failedFile);
 
-        //write this to a log file
+        //This creates a basic .txt file with the statistics of the .csv file that was passed in 
+        logStatistics = new LogFile(number_received, number_passed, number_failed);
+        logStatistics.CreateLog();
+
+        /* Primitive test, numbers seemed correct
         System.out.println("\nNumber received: " + number_received +
                             "\nNumber passed: " + number_passed +
                             "\nNumber failed: " + number_failed);
+                            */
     }
 
     public static List<String> parseLine(String csvLine)

@@ -44,19 +44,26 @@ public class CSVParser
             if(pass_column_count)
             {
                 number_passed++;
-                System.out.println("The size of the line is: " + line.size() + " Value of the name " + line.get(0)
+                /*System.out.println("The size of the line is: " + line.size() + " Value of the name " + line.get(0)
                         + line.get(1) + line.get(2) + line.get(3) + line.get(4) + line.get(5) +
-                        line.get(6) + line.get(7) + line.get(8) + line.get(9));
+                        line.get(6) + line.get(7) + line.get(8) + line.get(9));*/
             }
             else
             {
                 number_failed++;
                 failedFile.writeToCSV(line);
+                pass_column_count = true;
             }
 
         }
         scanner.close();
+        //closes the failed .csv file
+        closeFile(failedFile);
 
+        //write this to a log file
+        System.out.println("\nNumber received: " + number_received +
+                            "\nNumber passed: " + number_passed +
+                            "\nNumber failed: " + number_failed);
     }
 
     public static List<String> parseLine(String csvLine)
@@ -119,6 +126,7 @@ public class CSVParser
                         result.add(EMPTY_CELL);
 
                         currentValue = new StringBuilder();
+                        pass_column_count =  false;
                     }
                     else
                     {

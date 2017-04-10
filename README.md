@@ -23,7 +23,7 @@ Create Table Users
 
 The only external library I used was sqlite-jdbc-3.16.1.jar.
 
-The application so far consumes the file, parses it, and writes all the bad entries in to a bad entry <timestamp>.csv. It also creates the log file to tell the user how many files were received, how many have passed and failed. 
+The application so far consumes the file, parses it, and writes all the bad entries in to a bad entry <timestamp>.csv. It also creates the log file to tell the user how many files were received, how many have passed and failed. The bad entries will have 'NULL' in the columns where it lacks data. That is how i determined which ones are bad entries.  
 
 The only thing that I am running into trouble is writing all the parsed information into SQLite database Users table I created. 
 
